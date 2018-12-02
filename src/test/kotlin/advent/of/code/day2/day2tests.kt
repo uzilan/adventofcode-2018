@@ -18,3 +18,19 @@ class InventoryTests : StringSpec({
         inventory(input) shouldBe 12
     }
 })
+
+class DifferingIdsTests : StringSpec({
+    "Differing ids should return the chars that are similar" {
+        val input = """
+            abcde
+            fghij
+            klmno
+            pqrst
+            fguij
+            axcye
+            wvxyz
+        """.trimIndent().split("\n")
+
+        differingIds(input) shouldBe "fgij"
+    }
+})

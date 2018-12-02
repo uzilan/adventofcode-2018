@@ -1,10 +1,19 @@
 package advent.of.code.day2
 
 import java.io.File
+import java.lang.System.currentTimeMillis as now
 
 fun main(args: Array<String>) {
     val lines = File("src/main/resources/day2/day2input.txt").readLines()
-    println(inventory(lines))
+
+    val start = now()
+    val inventory = inventory(lines)
+    val inventoryMs = now() - start
+    val diff = differingIds(lines)
+    val diffMs = now() - start + inventoryMs
+
+    println("$inventory ($inventoryMs ms)")
+    println("$diff ($diffMs ms)")
 }
 
 fun inventory(lines: List<String>): Int {
@@ -18,3 +27,23 @@ fun inventory(lines: List<String>): Int {
     return doubles * triplets
 }
 
+tailrec fun differingIds(lines: List<String>): String {
+    return if (lines.isEmpty()) ""
+    else {
+        val comparison = compare(lines, lines.first())
+        if (comparison.isNotEmpty()) comparison
+        else differingIds(lines.drop(1))
+    }
+}
+
+tailrec fun compare(lines: List<String>, line: String): String {
+    return if (lines.isEmpty()) ""
+    else {
+        val comparison = lines.first()
+                .mapIndexed { index, c ->
+                    if (c == line[index]) c else ' '
+                }
+        if (comparison.count { it == ' ' } == 1) comparison.joinToString("").replace(" ", "")
+        else compare(lines.drop(1), line)
+    }
+}
