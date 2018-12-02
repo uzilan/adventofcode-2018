@@ -3,7 +3,7 @@ package advent.of.code.day1
 import java.io.File
 
 fun main(args: Array<String>) {
-    val lines = File("src/main/resources/day1input.txt").readLines()
+    val lines = File("src/main/resources/day1/day1input.txt").readLines()
     println(calibrate(lines))
     println(chronalCalibration(lines, lines))
 }
