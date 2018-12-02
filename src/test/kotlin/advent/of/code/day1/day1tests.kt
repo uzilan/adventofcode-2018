@@ -17,3 +17,17 @@ class CalibrationTests : StringSpec({
         }
     }
 })
+
+class ChronalCalibrationTests : StringSpec({
+    "Chronal calibration should result in correct number" {
+        forall(
+                row(listOf("+1", "-2", "+3", "+1"), 2),
+                row(listOf("-1", "+1"), 0),
+                row(listOf("+3", "+3", "+4", "-2", "-4"), 10),
+                row(listOf("-6", "+3", "+8", "+5", "-6"), 5),
+                row(listOf("+7", "+7", "-2", "-7", "-4"), 14)
+        ) { strings, result ->
+            chronalCalibration(strings, strings) shouldBe result
+        }
+    }
+})
