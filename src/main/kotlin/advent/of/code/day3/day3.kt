@@ -8,19 +8,18 @@ fun main(args: Array<String>) {
 }
 
 object Day3 {
-
-    private val regex = ".*@ (\\d+),(\\d+): (\\d+)x(\\d+)".toRegex()
+    private val regex = "#(\\d+)\\s@\\s(\\d+),(\\d+): (\\d+)x(\\d+)".toRegex()
     private val distinctPairs = emptySet<Pair<Int, Int>>().toMutableSet()
     private val overlappingPairs = emptySet<Pair<Int, Int>>().toMutableSet()
 
     fun overlapping(lines: List<String>): Int {
         // find all coordinates in each line
         lines.forEach { line ->
-            val (left, top, width, height) = parseLine(line)
+            val claim = Claim(line)
 
             // create pairs for every coordinate
-            (left..(left + width - 1)).forEach { x ->
-                (top..(top + height - 1)).forEach { y ->
+            (claim.left..(claim.left + claim.width - 1)).forEach { x ->
+                (claim.top..(claim.top + claim.height - 1)).forEach { y ->
                     val pair = Pair(x, y)
                     if (distinctPairs.contains(pair)) overlappingPairs += pair
                     else distinctPairs.add(pair)
@@ -30,9 +29,12 @@ object Day3 {
         return overlappingPairs.size
     }
 
-    fun parseLine(line: String): List<Int> {
-        return regex.matchEntire(line)!!.groupValues // match groups
-                .drop(1) // the first group is the whole line. Drop it
-                .map { it.toInt() } // convert every group into an int
+    class Claim(line: String) {
+        private val groups = regex.matchEntire(line)!!.groupValues
+        val id = groups[1]
+        val left = groups[2].toInt()
+        val top = groups[3].toInt()
+        val width = groups[4].toInt()
+        val height = groups[5].toInt()
     }
 }

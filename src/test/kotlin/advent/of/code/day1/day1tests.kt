@@ -13,12 +13,10 @@ class CalibrationTests : StringSpec({
                 row(listOf("+1", "+1", "-2"), 0),
                 row(listOf("-1", "-2", "-3"), -6)
         ) { strings, result ->
-            calibrate(strings) shouldBe result
+            Day1.calibrate(strings) shouldBe result
         }
     }
-})
 
-class ChronalCalibrationTests : StringSpec({
     "Chronal calibration should result in correct number" {
         forall(
                 row(listOf("+1", "-2", "+3", "+1"), 2),
@@ -27,7 +25,7 @@ class ChronalCalibrationTests : StringSpec({
                 row(listOf("-6", "+3", "+8", "+5", "-6"), 5),
                 row(listOf("+7", "+7", "-2", "-7", "-4"), 14)
         ) { strings, result ->
-            chronalCalibration(strings, strings) shouldBe result
+            Day1.chronalCalibration(strings, strings) shouldBe result
         }
     }
 })

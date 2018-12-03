@@ -15,11 +15,9 @@ class InventoryTests : StringSpec({
             ababab
         """.trimIndent().split("\n")
 
-        inventory(input) shouldBe 12
+        Day2.inventory(input) shouldBe 12
     }
-})
 
-class DifferingIdsTests : StringSpec({
     "Differing ids should return the chars that are similar" {
         val input = """
             abcde
@@ -31,6 +29,6 @@ class DifferingIdsTests : StringSpec({
             wvxyz
         """.trimIndent().split("\n")
 
-        differingIds(input) shouldBe "fgij"
+        Day2.differingIds(input) shouldBe "fgij"
     }
 })
