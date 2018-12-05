@@ -4,7 +4,8 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val line = File("src/main/resources/day5/day5input.txt").readLines()[0]
-    println(Day5.reduce(line, line))
+//    println(Day5.reduce(line, line))
+    println(Day5.removeAndReduce(line))
 }
 
 object Day5 {
@@ -19,6 +20,13 @@ object Day5 {
                 } else reduce(theWholeLine, line.drop(1), result + 1)
             }
         }
+    }
+
+    fun removeAndReduce(line: String): Int {
+        return ('a'..'z')
+                .map { line.replace(it.toString(), "").replace(it.toUpperCase().toString(), "") }
+                .map { reduce(it, it) }
+                .min()!!
     }
 
     private fun areCharsSameButDifferentCase(first: Char, second: Char) = first.toLowerCase() == second.toLowerCase() &&

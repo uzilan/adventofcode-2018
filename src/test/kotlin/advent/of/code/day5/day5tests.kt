@@ -5,6 +5,10 @@ import io.kotlintest.specs.StringSpec
 
 class InventoryTests : StringSpec({
     "Polymers should reduce" {
-        Day5.reduce("dabAcCaCBAcCcaDA","dabAcCaCBAcCcaDA") shouldBe "dabCBAcaDA".length
+        Day5.reduce("dabAcCaCBAcCcaDA", "dabAcCaCBAcCcaDA") shouldBe "dabCBAcaDA".length
+    }
+
+    "Improving polymer should give a shorter result" {
+        Day5.removeAndReduce("dabAcCaCBAcCcaDA") shouldBe "daDA".length
     }
 })
