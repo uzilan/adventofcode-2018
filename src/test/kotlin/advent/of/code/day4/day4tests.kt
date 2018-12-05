@@ -29,5 +29,6 @@ class OverlapTests : StringSpec({
         val guardData = Day4.initGuardData(input)
 
         Day4.strategy1(guardData) shouldBe 240
+        Day4.strategy2(guardData) shouldBe 4455
     }
 })
